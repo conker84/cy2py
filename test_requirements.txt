@@ -1,0 +1,2 @@
+pytest
+testcontainers[neo4j]>=3.6.1
