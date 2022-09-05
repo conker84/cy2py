@@ -61,7 +61,7 @@ optional arguments:
 
 ## Example
 
-Under the example directory you'll find a Google Colab notebook that shows how to use
+Under the examples directory you'll find a Google Colab notebook that shows how to use
 cy2py in order to dive into a Neo4j crime dataset showing also how is easy 
 to seamlessly leverage other visualization libraries such as Ploty.
 
