@@ -24,8 +24,8 @@ You can check the listo of accepted arguments by running the following command:
 
 ```bash
 %cypher [-a ALIAS] [-u URI] [-us USERNAME] [-pw PASSWORD] [-db DATABASE]
-              [-q QUERY] [-c CLOSE] [-co COLORS] [-ca CAPTIONS] [-la LAYOUT]
-              [-l]
+              [-q QUERY] [-p PARAMS] [-c CLOSE] [-co COLORS] [-ca CAPTIONS]
+              [-la LAYOUT] [-l]
 
 optional arguments:
   -a ALIAS, --alias ALIAS
@@ -48,6 +48,8 @@ optional arguments:
   -q QUERY, --query QUERY
                         Pass the Cypher query as argument. Valid only when you
                         use line magic.
+  -p PARAMS, --params PARAMS
+                        A map of Cypher query parameters
   -c CLOSE, --close CLOSE
                         Close a Driver connection by alias or URI
   -co COLORS, --colors COLORS
