@@ -18,7 +18,7 @@ You can use cy2py in two ways:
 
 ## Magic arguments
 
-You can check the listo of accepted arguments by running the following command:
+You can check the list of accepted arguments by running the following command:
 
 `%cypher?`
 
