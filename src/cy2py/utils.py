@@ -94,7 +94,7 @@ def display_graph(networkx_graph, config):
     display(w)
 
 
-def run_query(driver, query, cfg, is_inline):
+def run_query(driver, query, cfg, is_inline, params=None):
     # we return only the last one
     config = cfg['config']
     with driver.session(database=cfg['database']) as session:
@@ -102,11 +102,12 @@ def run_query(driver, query, cfg, is_inline):
         for sub_query in query.split(';'):
             sub_query = sub_query.strip()
             if sub_query != '':
-                result = session.run(sub_query)
+                result = session.run(sub_query, **params) if params else session.run(sub_query)
 
         graph = result.graph()
-        if not is_inline and len(graph._nodes) > 0:
-            return display_graph(to_nextworkx(graph, config['colors'], config['captions']), config['layout'])
+        if len(graph._nodes) > 0:
+            nx_graph = to_nextworkx(graph, config['colors'], config['captions'])
+            return nx_graph if is_inline else display_graph(nx_graph, config['layout'])
         else:
             return result.to_df()
 

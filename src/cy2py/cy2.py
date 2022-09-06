@@ -153,6 +153,7 @@ class Cy2Py(Magics):
     @argument("-pw", "--password", type=str, help="The Neo4j Password")
     @argument("-db", "--database", type=str, help="The Neo4j Database, if not provided we use the default")
     @argument("-q", "--query", type=str, help="Pass the Cypher query as argument. Valid only when you use line magic.")
+    @argument("-p", "--params", type=str, help="A map of Cypher query parameters")
     @argument("-c", "--close", type=str, help="Close a Driver connection by alias or URI")
     @argument("-co", "--colors", type=str, help="A map label/color")
     @argument("-ca", "--captions", type=str, help="A map label/caption")
@@ -192,7 +193,7 @@ class Cy2Py(Magics):
         if uri not in self.cypher_connections:
             self.cypher_connections[uri] = GraphDatabase.driver(uri, auth=auth)
 
-        return run_query(self.cypher_connections[uri], cell, self.config_cache[alias], is_inline)
+        return run_query(self.cypher_connections[uri], cell, self.config_cache[alias], is_inline, args.params)
 
 
 def load_ipython_extension(ip):

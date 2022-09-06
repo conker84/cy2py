@@ -54,6 +54,12 @@ class CypherMagicTest(TestCase):
             print([[df['name'][ind] for ind in df.index]])
         ''')
         assert res.success
+        res = self._ip.run_cell(raw_cell='''
+            graph_query = 'MATCH (c:Customer) RETURN c'
+            nx_graph = %cypher -u $neo4j_url -q $graph_query
+            print(nx_graph)
+        ''')
+        assert res.success
 
     def test_cell_magic(self):
         self._ip.run_cell(raw_cell='''
