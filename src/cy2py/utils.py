@@ -42,7 +42,7 @@ except ImportError:
     import urlparse
 
 
-def to_nextworkx(graph, colors, captions):
+def to_nextworkx(graph, colors, captions, mappings=None):
     networkx_graph = nx.MultiDiGraph()
 
     def add_node(node):
@@ -59,7 +59,7 @@ def to_nextworkx(graph, colors, captions):
 
     def add_edge(edge):
         props = dict(edge.items())
-        networkx_graph.add_edge(edge.start_node.id, edge.end_node.id, weight=2, label=edge.type, tooltip=str(props))
+        networkx_graph.add_edge(edge.start_node.id, edge.end_node.id, label=edge.type, tooltip=str(props), **props)
 
     for node in graph._nodes.values():
         add_node(node)
