@@ -45,19 +45,24 @@ class CypherMagicTest(TestCase):
             df = %cypher -u $neo4j_url MATCH (c:Customer) RETURN c.companyName as name
             print([[df['name'][ind] for ind in df.index]])
         ''')
+
         assert res.success
         self._ip.run_cell(raw_cell=f'''
             query = 'MATCH (c:Customer) RETURN c.companyName as name'
         ''')
         res = self._ip.run_cell(raw_cell='''
-            df = %cypher -u $neo4j_url -q "$query"
+            df = %cypher -q "$query"
             print([[df['name'][ind] for ind in df.index]])
         ''')
         assert res.success
         res = self._ip.run_cell(raw_cell='''
             graph_query = 'MATCH (c:Customer) RETURN c'
-            nx_graph = %cypher -u $neo4j_url -q $graph_query
+            nx_graph = %cypher -q $graph_query
             print(nx_graph)
+        ''')
+        assert res.success
+        res = self._ip.run_cell(raw_cell='''
+            %cypher -c $neo4j_url
         ''')
         assert res.success
 

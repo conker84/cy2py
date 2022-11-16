@@ -173,13 +173,14 @@ class Cy2Py(Magics):
         if args.list:
             return self.cypher_connections.keys()
         elif args.close:
-            config = None
+            driver = None
             if args.close in self.cypher_connections:
-                config = self.cypher_connections.pop(args.close)
+                driver = self.cypher_connections.pop(args.close)
             elif args.close in self.config_cache:
-                config = self.cypher_connections.pop(self.config_cache[args.close]['uri'], None)
-            if config:
-                config['driver'].close()
+                driver = self.cypher_connections.pop(self.config_cache[args.close]['uri'], None)
+
+            if driver:
+                driver.close()
                 return 'Driver closed successfully'
             else:
                 return f'Connection not defined for {args.close}'
