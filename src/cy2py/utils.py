@@ -59,7 +59,8 @@ def to_nextworkx(graph, colors, captions, mappings=None):
 
     def add_edge(edge):
         props = dict(edge.items())
-        networkx_graph.add_edge(edge.start_node.id, edge.end_node.id, label=edge.type, tooltip=str(props), **props)
+        weight = props.get('weight', 1)
+        networkx_graph.add_edge(edge.start_node.id, edge.end_node.id, weight=weight, label=edge.type, tooltip=str(props))
 
     for node in graph._nodes.values():
         add_node(node)

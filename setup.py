@@ -13,7 +13,7 @@ install_requires = [
 
 setup(
     name="cy2py",
-    version="1.1.1",
+    version="1.1.2",
     author="Andrea Santurbano",
     author_email="santand@gmail.com",
     description="",
