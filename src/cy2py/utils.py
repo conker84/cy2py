@@ -48,12 +48,12 @@ def to_nextworkx(graph, colors, captions, mappings=None):
     def add_node(node):
         label = ':' + ':'.join(node.labels)
         props = dict(node.items())
-        if label in captions and label in props:
-            props['labels'] = label
-            label = props[label]
         color = ''
         if label in colors:
             color = colors[label]
+        if label in captions and captions[label] in props:
+            props['labels'] = label
+            label = props[captions[label]]
 
         networkx_graph.add_node(node.id, label=label, color=color, properties=props, title=label, tooltip=str(props))
 
