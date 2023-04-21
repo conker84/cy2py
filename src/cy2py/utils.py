@@ -1,6 +1,7 @@
 import networkx as nx
 import ipycytoscape
 from IPython.core.display import display
+import json
 
 node_centered = {
     'selector': 'node',
@@ -57,6 +58,10 @@ def to_nextworkx(graph, colors, captions, mappings=None):
                 label = ' '.join(map(lambda l: props[l], captions[label]))
             else:
                 label = props[captions[label]]
+
+        # taken from https://stackoverflow.com/questions/11875770/how-to-overcome-datetime-datetime-not-json-serializable/36142844#36142844
+        json_str = json.dumps(props, indent=4, sort_keys=True, default=str)
+        props = json.loads(json_str)
 
         networkx_graph.add_node(node.id, label=label, color=color, properties=props, title=label, tooltip=str(props))
 

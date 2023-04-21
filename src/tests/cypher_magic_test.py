@@ -105,3 +105,14 @@ class CypherMagicTest(TestCase):
             SHOW DATABASES
         ''')
         assert res.success
+
+    def test_cell_magic_date(self):
+        self._ip.run_cell(raw_cell=f'''
+            neo4j_url = '{self.neo4j_url}'
+        ''')
+        res = self._ip.run_cell(raw_cell='''
+            %%cypher -u $neo4j_url
+            CREATE (n:Company {date: date('1970-01-01')})
+            RETURN n
+        ''')
+        assert res.success
