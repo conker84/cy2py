@@ -86,8 +86,8 @@ class Cy2Py(Magics):
 
             if local_ns.__contains__(var_name):
                 args[arg_key] = local_ns[var_name]
-            elif local_ns.__contains__(var_name):
-                args[arg_key] = local_ns[var_name]
+            else:
+                args[arg_key] = var_name
 
         # we try to reconstruct the query
         if not args['query'] and len(to_remove) > 0:
